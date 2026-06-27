@@ -2,7 +2,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useNode } from '@/lib/context';
-import { LayoutDashboard, Building2, PawPrint, Stethoscope, Users, ClipboardList, FlaskConical, MapPin, Lock } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { LayoutDashboard, Building2, PawPrint, Stethoscope, Users, ClipboardList, FlaskConical, MapPin, Lock, LogOut } from 'lucide-react';
 
 const modules = [
   { href: '/',              label: 'Dashboard',    icon: LayoutDashboard, nodes: ['quito', 'cuenca'] as const },
@@ -17,6 +18,7 @@ const modules = [
 export default function Sidebar() {
   const pathname = usePathname();
   const { node } = useNode();
+  const router = useRouter();
 
   return (
     <aside className="w-60 bg-emerald-950 text-white flex flex-col shrink-0 overflow-y-auto">
@@ -61,10 +63,13 @@ export default function Sidebar() {
       </nav>
 
       <div className="p-4 border-t border-emerald-800">
-        <div className={`flex items-center gap-2 text-xs px-3 py-2 rounded-lg ${node === 'quito' ? 'bg-emerald-800/50 text-emerald-300' : 'bg-sky-900/50 text-sky-300'}`}>
-          <MapPin className="w-3.5 h-3.5 shrink-0" />
-          <span>Nodo activo: <strong>{node === 'quito' ? 'Quito (N1)' : 'Cuenca (N2)'}</strong></span>
-        </div>
+        <button
+          onClick={() => router.push('/login')}
+          className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-xs text-emerald-300 hover:bg-emerald-800/60 hover:text-white transition-all"
+        >
+          <LogOut className="w-3.5 h-3.5 shrink-0" />
+          <span>Cerrar sesión</span>
+        </button>
       </div>
     </aside>
   );
