@@ -38,6 +38,8 @@ SQL Server Quito                SQL Server Cuenca
 - [x] Módulo de Exámenes bloqueado cuando se selecciona Cuenca
 - [x] Dashboard con estadísticas del nodo activo
 - [x] Fondo personalizado (`public/vetcare.png`)
+- [x] Página de login (`/login`) — solo visual, sin validación
+- [x] Botón "Cerrar sesión" en sidebar redirige a `/login`
 - [ ] **Pendiente: conectar a SQL Server real** (actualmente usa datos mock)
 
 ---
@@ -61,6 +63,7 @@ SQL Server Quito                SQL Server Cuenca
 vetcare/
 ├── app/                        # Páginas (Next.js App Router)
 │   ├── page.tsx                # Dashboard con estadísticas
+│   ├── login/page.tsx          # Página de login (solo visual)
 │   ├── sedes/page.tsx
 │   ├── mascotas/page.tsx
 │   ├── veterinarios/page.tsx
@@ -69,8 +72,9 @@ vetcare/
 │   └── examenes/page.tsx
 ├── components/
 │   ├── AppShell.tsx            # Layout principal (sidebar + header + fondo)
+│   ├── ConditionalShell.tsx    # Omite AppShell en rutas sin sidebar (ej. /login)
 │   ├── Header.tsx              # Header con selector de nodo
-│   ├── Sidebar.tsx             # Navegación lateral
+│   ├── Sidebar.tsx             # Navegación lateral + botón cerrar sesión
 │   ├── Modal.tsx               # Modal reutilizable para formularios
 │   └── FragBadge.tsx           # Badge de tipo de fragmentación (interno)
 ├── lib/
